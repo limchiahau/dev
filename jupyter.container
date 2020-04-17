@@ -1,0 +1,24 @@
+# Usage:
+# bash Runfile
+# 
+# This script builds the jupyter-server container
+# with the specified port and directories.
+#
+# After running this script, open the provided url
+# in your browser to authenticate.
+
+
+# remove if container already exists
+podman container stop jupyter-server     > /dev/null
+podman container rm jupyter-server     > /dev/null
+
+
+# create new jupyter-server container
+# than stops the container
+podman run -d --name jupyter-server -p 127.0.0.1:8888:8888 -v ~/Projects:/home/newuser/app:Z chl0/dev:0.1     > /dev/null
+sleep 10
+
+
+# get current running jupyter servers.
+# we dont stop the container so that the token doesnt change.
+podman exec jupyter-server jupyter notebook list
