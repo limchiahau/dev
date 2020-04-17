@@ -8,13 +8,11 @@ RUN apt-get update
 RUN apt-get install sqlite3
 RUN pip install geopandas descartes
 
-
 # add new user
 RUN useradd -ms /bin/bash newuser
-WORKDIR /home/newuser
-USER newuser
-
+RUN mkdir /home/newuser/app
+WORKDIR /home/newuser/app
 
 # Run server by default
-CMD jupyter notebook --ip=0.0.0.0 --port=8888
+CMD jupyter notebook --port=8888 --allow-root
 EXPOSE 8888
