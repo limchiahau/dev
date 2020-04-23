@@ -1,0 +1,27 @@
+# Usage:
+# bash Runfile
+# 
+# This script builds a Jekyll 4 container
+# with the specified port and directories.
+
+
+# variables
+declare -r CONTAINER_NAME='jekyll-server'
+declare -r IMAGE='jekyll/jekyll:4'
+
+declare -r HOST='127.0.0.1:8001'
+declare -r VOLUME=$HOME'/Projects/limchiahau.github.io'
+declare -r COMMAND='jekyll serve --trace'
+
+
+# debugging variable
+declare -r OUTPUT='/dev/stdout'
+
+
+# remove if container already exists
+podman container stop $CONTAINER_NAME     > $OUTPUT 
+podman container rm $CONTAINER_NAME     > $OUTPUT
+
+
+# create new container
+podman run --name $CONTAINER_NAME -it -p $HOST:4000 -v $VOLUME:/srv/jekyll:Z $IMAGE $COMMAND   > $OUTPUT
