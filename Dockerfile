@@ -1,4 +1,8 @@
 FROM continuumio/anaconda3:2020.02
+MAINTAINER CH Lim
+LABEL homepage="https://limchiahau.github.io/"
+LABEL github="https://github.com/limchiahau"
+
 
 # update apt-get database
 RUN apt-get update
