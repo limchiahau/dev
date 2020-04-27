@@ -14,5 +14,5 @@ RUN mkdir /home/newuser/app
 WORKDIR /home/newuser/app
 
 # Run server by default
-CMD jupyter notebook --port=8888 --allow-root
+CMD jupyter notebook --ip=0.0.0.0 --port=8888 --allow-root
 EXPOSE 8888
