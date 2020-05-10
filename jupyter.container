@@ -14,11 +14,4 @@ podman container rm jupyter-server     > /dev/null
 
 
 # create new jupyter-server container
-# than stops the container
-podman run -d --name jupyter-server -p 127.0.0.1:8888:8888 -v ~/Projects:/home/newuser/app:Z chl0/dev:0.1     > /dev/null
-sleep 10
-
-
-# get current running jupyter servers.
-# we dont stop the container so that the token doesnt change.
-podman exec jupyter-server jupyter notebook list
+podman create --name jupyter-server -p 8888:8888 -v /home/chl/Documents/Projects:/home/newuser/app:Z --mount type=volume,source=jupyter,target=/root/.local/share/jupyter/runtime chl0/dev jupyter notebook --ip 0.0.0.0 --allow-root
